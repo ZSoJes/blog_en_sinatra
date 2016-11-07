@@ -1,0 +1,30 @@
+  <h1>Mi Blog Anonimo</h1>
+
+  <hr>
+  <br>
+
+  <form method="post" action="/post" id="new_post">
+    <h4><label for="post_title">Titulo:</label></h4>
+    <!-- <input id="post_title" name="post[title]"> -->
+    <input id="post_title" name="title">
+
+    <h4><label for="post_message">Post:</label></h4>
+    <!-- <textarea id="post_message" name="post[message]" form="new_post" style="width: 100%;height: 150px"></textarea> -->
+    <textarea id="post_message" name="message" form="new_post" style="width: 100%;height: 150px"></textarea>
+
+    <br>
+
+    <h4><label for="post_tags">Tags:</label></h4>
+    <input id="post_tags" name="post[tags]" style="width: 100%">
+
+    <br><br>
+
+    <input type="submit" value="Nuevo!">
+  </form>
+
+  <hr>
+  <br>
+  <table  style="width: 100%"><tr>
+    <td><center><a href="/show_all"><button>Ver todos los Post</button></a></center></td>
+    <td><center><a href="/find"><button>Buscar</button></a></center></td>
+  </tr></table>

@@ -1,0 +1,27 @@
+<style type="text/css">
+   table tr td {
+    border: 2px solid cadetblue
+  }
+</style>
+<h1>Todos los post existentes</h1>
+<br>
+<hr>
+<br>
+<table style="width: 100%">
+<% @blog.each do |blog| %>
+  <tr style="font-size: 25px">
+      <td style="width: 15%">Post::ID</td>
+      <td style="">Post::Message</td>
+  </tr>
+  <tr>
+      <td style="width: 15%">blog.id</td>
+      <td><%= blog.post %></td>
+  </tr>
+  <tr>
+    <td><%= blog.tag %></td>
+  </tr>
+  <tr>
+    <td><%= blog.fecha_hr_publicado %></td>
+  </tr>
+  <% end %>
+</table>
