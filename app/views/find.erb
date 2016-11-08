@@ -1,6 +1,49 @@
-<h1>Buscar Post</h1>
-<input type="text" name="id_post">
-<input type="submit" value="Buscar!">
+<h1>Buscar Post por Tag</h1>
 
-<button>Editar</button>
-<button>Borrar</button>
+  <form method="post" action="/tag">
+    <input type="text" name="tag_find">
+    <input type="submit" value="Buscar!" id="Find">
+      <h3 style="color:red"><%= @error %></h3>
+    <% end %>
+  </form>
+<br>
+
+  <button style="margin-top: 30px" id="Edit">Editar</button>
+  <button style="margin-top: 30px" id="Del">Borrar</button>
+
+
+  <%if @post_resultado %>
+    <% @post_resultado.each do |q| %>
+      <% q.each do |dato| %>
+
+<table style="width: 100%">
+<tr style="font-size: 20px">
+  <td style="width: 20%">POST::Titulo</td>
+  <td>POST::Mensaje</td>
+</tr>
+<tr>
+  <td style="width: 20%;background: royalblue"><%= dato.titulo %></td>
+  <td style="background: lightseagreen"><%= dato.mensaje %></td>
+</tr>
+<tr style="height: 50px;background-color: yellowgreen"><td colspan="2"></td></tr>
+</table>
+
+      <% end %>
+    <% end %>
+  <% end %>
+
+
+<a href="/"><button style="margin-left: 80%;margin-top: 20px">Regresar</button></a>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    // $("#Edit").hide();
+    // $("#Del").hide();
+
+    $("#Del").click(function(){
+      
+
+    });
+  });
+</script>
