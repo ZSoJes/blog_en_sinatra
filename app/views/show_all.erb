@@ -8,20 +8,37 @@
 <hr>
 <br>
 <table style="width: 100%">
+
 <% @blog.each do |blog| %>
-  <tr style="font-size: 25px">
-      <td style="width: 15%">Post::ID</td>
+  <tr style="font-size: 20px">
+      <td style="width: 20%">Post::Title</td>
       <td style="">Post::Message</td>
   </tr>
+
   <tr>
-      <td style="width: 15%">blog.id</td>
-      <td><%= blog.post %></td>
+      <td style="width: 20%;background: royalblue"><%= blog.titulo%></td>
+      <td style="background: lightseagreen"><%= blog.mensaje%></td>
   </tr>
+  
+
   <tr>
-    <td><%= blog.tag %></td>
+  <% tag_list = Blog.where(post_id: blog.id) %> 
+  <% contenedor = [] %>
+    <% tag_list.each do |t| %>
+      <% tag_post = Tag.find_by(id: t.tag_id) %>
+      <% contenedor << tag_post.etiquetas %>
+    <% end %>
+
+    <td colspan="2" style="background: palegreen"><center>
+    <%= contenedor.join("  ,  ") %>
+    </center>
+    </td>
   </tr>
-  <tr>
-    <td><%= blog.fecha_hr_publicado %></td>
+  
+  <tr style="height: 50px;background-color: yellowgreen">
+    <td colspan="2"></td>
   </tr>
+
   <% end %>
 </table>
+<a href="/"><button style="margin-left: 80%;margin-top: 20px">Regresar</button></a>
