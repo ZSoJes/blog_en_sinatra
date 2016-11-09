@@ -7,3 +7,20 @@
 th {
   text-align: left;
 }
+h1 {
+    font-family: verdana;
+    color: #333;
+    font-style: italic;
+    text-shadow: -1px -1px 0px #101010;
+  }
+  button, input[type=submit] {
+    border-radius: 5px;
+    background-color: Green;
+    box-shadow: 0 0 5px 5px GoldenRod;
+    color: Lavender;
+    padding: 6px;
+  }
+  button:hover, input[type=submit]:hover {
+    background-color: ForestGreen;
+    box-shadow: 0 0 5px 5px Gray;
+  }

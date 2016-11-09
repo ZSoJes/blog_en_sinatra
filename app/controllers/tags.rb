@@ -10,35 +10,40 @@ end
 
 post '/tag' do
 @post_resultado = []
-  tag_text = params[:tag_find]
+tag_text = params[:tag_find]
 
-  unless tag_text.empty?
+unless tag_text.empty?
     tag_text.downcase!
     dato = Tag.find_by(etiquetas: tag_text)
-    @post_find = Blog.where(tag_id: dato.id)
 
-    @post_find.each do |t| 
-      @post_resultado << Post.where(id: t.post_id) 
-    end
+    unless dato.nil?
+      @post_find = Blog.where(tag_id: dato.id)
 
-    evalua_post_existe =""
-    @post_resultado.each do |temp|
-      temp.each do |t1|
-        evalua_post_existe = t1
+      @post_find.each do |t| 
+        @post_resultado << Post.where(id: t.post_id) 
       end
-    end
 
-    if evalua_post_existe.empty?
-      redirect to '/find?error=true_'
+      evalua_post_existe =""
+      @post_resultado.each do |temp|
+        temp.each do |t1|
+          evalua_post_existe = t1
+        end
+      end
+
+      if evalua_post_existe.nil?
+        redirect to '/find?error=true_'
+      else
+        erb :find
+      end
+
     else
-      erb :find
+      redirect to '/find?error=true_'
     end
 
-  else
-  redirect to '/find?error=true'  
-  end
+else
+  redirect to '/find?error=true'
 end
-
+end
 get'/tag/:palabra' do                 # si se desea cargar una consulta desde la url
   @post_resultado = []
   tag_text = params[:palabra]
