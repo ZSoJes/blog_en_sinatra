@@ -43,3 +43,68 @@ end
 get '/find' do
   erb :find
 end
+
+post '/post_delete' do
+  dato = params[:delete_post]
+  dato = dato.to_i
+  @post = Post.find_by(id: dato)
+  @post.destroy
+  redirect to '/find'
+end
+
+
+post "/show_edit" do
+  dato = params[:buscar_editar]
+  @dato = dato.to_i
+  @post_datos = Post.find_by(id: @dato)
+
+  @tag_finder = Blog.where(post_id: @dato)
+  @tag_lista = []
+  @tag_finder.each do |t|
+    @nombre_tag = Tag.find_by(id: t.tag_id)
+    @tag_lista << @nombre_tag.etiquetas
+  end
+  @post_datos
+  @tag_lista
+  @dato
+  erb :edit
+end
+
+post '/post_edit' do
+  puts "::::::::::::::::::::::::::::::::::::::::::::::::"
+  @dato = params[:dato]
+  puts @dato
+  puts "::::::::::::::::::::::::::::::::::::::::::::::::"
+
+  @titulo = params[:title]
+  @post = params[:message]
+  
+  puts @titulo
+  puts @post
+# class Post < ActiveRecord::Base
+#   has_many :comments, autosave: true
+# end
+
+# =>  si funciona
+post = Post.find(@dato)
+post.titulo = @titulo
+post.mensaje = @post
+post.save
+post.reload
+
+# post.tags.ids
+# detect_tag = Blog.where(post_id: @dato)
+# detect_tag.each do |q|
+#   tag_actual = Tag.find_by(id: q)
+
+#   tag_actual.etiquetas = titulo
+#   post.mensaje = post
+#   post.save
+#   post.reload
+# end
+  # @post_edit = Post.find_by(id: @dato)
+  # @post_edit.update(titulo: titulo,mensaje: post)
+
+  # @blog_edit = Blog.where(pots_id: @dato)
+  redirect to '/find'
+end

@@ -1,35 +1,78 @@
+<style type="text/css">
+  #form_del, #form_ed, #find_post {
+    border: 2px dotted black;
+    margin-top: 30px;
+    padding:10px
+  }
+  table tr td {
+    border: 1px solid LightSlateGray;
+  }
+  table tr th {
+    text-align: center;
+    border: 1px solid DarkOrange;
+    color: white;
+    background-color: Goldenrod;
+  }
+</style>
+
 <h1>Buscar Post por Tag</h1>
 
   <form method="post" action="/tag">
     <input type="text" name="tag_find">
     <input type="submit" value="Buscar!" id="Find">
+    <% if @error%>
       <h3 style="color:red"><%= @error %></h3>
     <% end %>
   </form>
+
 <br>
-
-  <button style="margin-top: 30px" id="Edit">Editar</button>
-  <button style="margin-top: 30px" id="Del">Borrar</button>
-
 
   <%if @post_resultado %>
     <% @post_resultado.each do |q| %>
       <% q.each do |dato| %>
 
 <table style="width: 100%">
-<tr style="font-size: 20px">
-  <td style="width: 20%">POST::Titulo</td>
-  <td>POST::Mensaje</td>
-</tr>
-<tr>
-  <td style="width: 20%;background: royalblue"><%= dato.titulo %></td>
-  <td style="background: lightseagreen"><%= dato.mensaje %></td>
-</tr>
-<tr style="height: 50px;background-color: yellowgreen"><td colspan="2"></td></tr>
+  <tr >
+    <th style="width: 5%">ID</th>
+    <th style="width: 20%">POST::Titulo</th>
+    <th>POST::Mensaje</th>
+  </tr>
+  <tr>
+    <td><%= dato.id %></td>
+    <td style="background: royalblue"><%= dato.titulo %></td>
+    <td style="background: lightseagreen"><%= dato.mensaje %></td>
 </table>
+<br>
+<br>
 
       <% end %>
     <% end %>
+
+<hr>
+
+  <button id="Edit" style="width: 49%">Editar</button>
+  <button id="Del" style="width: 50%">Borrar</button>
+
+
+
+
+  <form action="/post_delete" method="post" id="form_del">
+  <label for="post_del">Post::ID: </label>
+  <input id="post_del" type="text" placeholder="Introduce ID del POST" name="delete_post">
+  <input type="submit" value="Borrar Post">
+  </form>
+
+
+
+
+<form action="/show_edit" method="post" id="find_post">
+  <label for="buscar">Post::ID: </label>
+  <input id="buscar" type="text" placeholder="ID del POST a Editar" name="buscar_editar">
+  <input type="submit" value="Editar Post" id="click_find">
+</form>
+
+<!--  -->
+<hr>
   <% end %>
 
 
@@ -38,12 +81,16 @@
 <script type="text/javascript">
   $(document).ready(function(){
 
-    // $("#Edit").hide();
-    // $("#Del").hide();
+    $("#form_del, #form_ed, #find_post").hide();
 
     $("#Del").click(function(){
-      
+      $("#Del, #find_post").hide();
+      $("#form_del, #Edit").show();
+    });
 
+    $("#Edit").click(function(){
+      $("#form_del, #Edit").hide();
+      $("#Del, #find_post").show()
     });
   });
 </script>
